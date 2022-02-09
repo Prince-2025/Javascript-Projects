@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"> 
+	<head>
+        <meta charset="UTF-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Progress bar with stages</title>
+        <style>
+            .progress {
+                width: 500px;
+            
+            }
+
+            .progress-fill { 
+                height: 22px;
+                width: 33%;
+                border-radius: 5px; 
+                background: #ce0303;
+                transition: width 0.6s;
+            }
+
+            .progress-text { 
+                padding: 10px;
+                text-align: center;
+                color: rgb(14, 5, 148);
+                font-size: 19px;
+                font-style: oblique;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+        </style>
+	</head>
+	<body>
+        <div class="progress" id="myProgressBar">
+            <div class="progress-fill"></div>
+            <div class="progress-text" data-stages="0:Initial setup,20:Getting dressed,100:Done"> MaxxSouth daily prep checklist.</div>
+        </div>
+		<script>
+           function updateProgressBar(progressBar, value) { 
+               const progressFill = progressBar.querySelector(".progress-Fill");
+               const progressText = progressBar.querySelector(".progress-text");
+               const stages = progressText.dataset.stages;
+               .split(",");
+
+               console.log(stages);
+           }
+
+           
+           updateProgressBar(document.getElementById("myProgressBar"), 27);
+        </script>
+	</body>
+</html>
