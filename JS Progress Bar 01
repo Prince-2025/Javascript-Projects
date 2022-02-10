@@ -13,7 +13,7 @@
 
             .progress-fill { 
                 height: 22px;
-                width: 33%;
+                width: 13%;
                 border-radius: 5px; 
                 background: #ce0303;
                 transition: width 0.6s;
@@ -33,20 +33,31 @@
 	<body>
         <div class="progress" id="myProgressBar">
             <div class="progress-fill"></div>
-            <div class="progress-text" data-stages="0:Initial setup,20:Getting dressed,100:Done"> MaxxSouth daily prep checklist.</div>
+            <div class="progress-text" data-stages="0:Sit down,10:Log into ACSR(s),20:Launch Five-9,40:Log into account comments tool,50:Log into BITS,60:Log into Truvizon,70:Launch Wiki,80:Log into Five-9,90:Vibe,100:Ready"> MaxxSouth daily prep checklist.</div>
         </div>
 		<script>
-           function updateProgressBar(progressBar, value) { 
-               const progressFill = progressBar.querySelector(".progress-Fill");
-               const progressText = progressBar.querySelector(".progress-text");
-               const stages = progressText.dataset.stages;
-               .split(",");
+           function updateProgressBar(progressBar, value) {
+  const progressFill = progressBar.querySelector(".progress-fill");
+  const progressText = progressBar.querySelector(".progress-text");
+  const stages = progressText.dataset.stages
+    .split(",")
+    .map((stage) => stage.split(":"));
 
-               console.log(stages);
-           }
+  stages.sort((stageA, stageB) => {
+    return stageB[0] - stageA[0];
+  });
 
-           
-           updateProgressBar(document.getElementById("myProgressBar"), 27);
+  console.log(stages);
+
+  const activeStage = stages.find((stage) => {
+    return value >= stage[0];
+  });
+
+  progressFill.style.width = `${value}%`;
+  progressText.textContent = `${activeStage[1]}...`;
+}
+
+updateProgressBar(document.getElementById("myProgressBar"), 13);
         </script>
 	</body>
 </html>
